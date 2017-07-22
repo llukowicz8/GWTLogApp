@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="Application">
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='app.gwt.sample.Application' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/Application/greet" class="app.gwt.sample.server.GreetingServiceImpl" />
+
+</module>
