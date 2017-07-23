@@ -8,6 +8,16 @@ public interface Messages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Enter your name")
   String nameField();
 
-  @DefaultMessage("Send")
-  String sendButton();
+  @DefaultMessage("Zaladuj plik")
+  String loadButton();
+
+  @DefaultMessage("Parsuj")
+  String parseButton();
+
+  @DefaultMessage("Tresc pliku")
+  String contentHeader();
+
+  @DefaultMessage("Wynik parsowania")
+  String popUpHeader();
+
 }

@@ -18,7 +18,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.CellPreviewEvent;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 public class MyWidget extends Composite {
@@ -30,54 +29,30 @@ public class MyWidget extends Composite {
     private static final String UPLOAD_ACTION_URL = GWT.getModuleBaseURL() + "upload";
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
     private final LogServiceAsync logService = GWT.create(LogService.class);
-
+    @UiField
+    Messages BUNDLE;
     @UiField
     FormPanel form;
-
     @UiField
     Button uploadButton;
-
     @UiField
     Button parseButton;
-
-
     @UiField
     CellTable<Log> table;
-
-
-
     @UiField
-    DialogBox wishlistDialogBox;
+    DialogBox dialogBox;
 
 
-   //@PostConstruct \robic
 
-    private void addColumns() {
-        TextColumn<Log> nameColumn = new TextColumn<Log>() {
-            @Override
-            public String getValue(Log object) {
-                return object.getContent();
-            }
-        };
-        // Add column to table
-        table.addColumn(nameColumn);
-
-    }
-
-
-    public MyWidget(String... names) {
-        // sets listBox
+    public MyWidget() {
         initWidget(uiBinder.createAndBindUi(this));
-        addColumns();
+        addColumn();
         form.setAction(UPLOAD_ACTION_URL);
         form.setEncoding(FormPanel.ENCODING_MULTIPART);
         form.setMethod(FormPanel.METHOD_POST);
+        dialogBox.setText(BUNDLE.popUpHeader());
         parseButton.setEnabled(false);
         table.setVisible(false);
-
-
-
-
 
     }
 
@@ -89,7 +64,7 @@ public class MyWidget extends Composite {
 
     @UiHandler("parseButton")
     void onParseClick(ClickEvent event) {
-        logService.getLogById(CHOSEN_LOG_ID,new LogByIdCallback());
+        logService.getParsedLogById(CHOSEN_LOG_ID,new LogByIdCallback());
         parseButton.setEnabled(false);
     }
 
@@ -97,21 +72,26 @@ public class MyWidget extends Composite {
 
     @UiHandler("form")
     void onUploadFormSubmitComplete(FormPanel.SubmitCompleteEvent event) {
-        GWT.log("wowo");
         logService.getLogs(new AllLogsCallback());
 
     }
 
     @UiHandler("table")
     void onCellTableCellRowClick(CellPreviewEvent<Log> event) {
-
-       // GWT.log(String.valueOf(event.getValue().getId()));
         CHOSEN_LOG_ID = event.getValue().getId();
         parseButton.setEnabled(true);
-
     }
 
+    private void addColumn() {
+        TextColumn<Log> nameColumn = new TextColumn<Log>() {
+            @Override
+            public String getValue(Log object) {
+                return object.getContent();
+            }
+        };
+        table.addColumn(nameColumn,BUNDLE.contentHeader());
 
+    }
 
 
 
@@ -140,14 +120,15 @@ public class MyWidget extends Composite {
 
         public void onSuccess(String result) {
 
-            //GWT.log(String.valueOf(result));
-            GWT.log("dostanie przeparsowany "+result);
-            wishlistDialogBox.center();
-            //wishlistDialogBox.setVisible(true);
-            wishlistDialogBox.setText(result);
+            Label content = new Label(result);
+            dialogBox.center();
+            dialogBox.setWidget(content);
+
         }
 
     }
+
+
 
 
 

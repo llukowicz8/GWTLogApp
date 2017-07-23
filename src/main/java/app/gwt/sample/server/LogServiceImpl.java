@@ -1,12 +1,12 @@
 package app.gwt.sample.server;
 
-import app.gwt.sample.client.GreetingService;
+
 import app.gwt.sample.client.LogService;
 import app.gwt.sample.shared.Log;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 public class LogServiceImpl extends RemoteServiceServlet implements
@@ -21,13 +21,9 @@ public class LogServiceImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public String getLogById(final int logId) {
-         Log pobrany = repo.getElements().stream().filter(e->e.getId()==logId).
+    public String getParsedLogById(int logId) {
+         Log log = repo.getElements().stream().filter(e->e.getId()==logId).
                  findFirst().get();
-
-         String parsed = parser.parseLog(pobrany);
-
-
-       return parsed;
+         return parser.parseLog(log);
     }
 }

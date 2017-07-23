@@ -10,5 +10,5 @@ import java.util.List;
 public interface LogService extends RemoteService {
 
     List<Log> getLogs();
-    String getLogById(int logId);
+    String getParsedLogById(int logId);
 }

@@ -34,10 +34,10 @@ h1 {
 }
 
 .myStyle {
-  padding-left: 500px;
+  padding-left: 700px;
 }
-.gwt-FileUpload {
-  padding-left: 500px;
+.formBtn{
+  margin-top: 25px;
 }
 .gwt-Form{
   padding-left: 300px;

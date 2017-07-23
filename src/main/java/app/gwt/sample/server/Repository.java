@@ -31,6 +31,7 @@ public class Repository {
     public void deleteContent(){
         elements.clear();
     }
+
     public List<Log>getElements(){
         return  elements;
     }

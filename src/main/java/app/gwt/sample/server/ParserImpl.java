@@ -10,11 +10,15 @@ public class ParserImpl implements Parser {
 
     @Override
     public String parseLog(Log log) {
-        String params="";
-        String parsedString="";
-        StringBuffer sb = new StringBuffer();
+        String tempParsedString="";
+        String parameters="";
+        String[] paramsArray;
+        StringBuffer result = new StringBuffer();
         String patternSelect = "SELECT|UPDATE|DELETE";
+        String parametersPattern = "(\\(.*\\))(.*)";
         String questionMark = "\\?";
+        int counter=0;
+        int startIndex = 0 ;
 
         Pattern patternFormula = Pattern.compile(patternSelect);
         Matcher matcherFormula = patternFormula.matcher(log.getContent());
@@ -22,20 +26,20 @@ public class ParserImpl implements Parser {
 
             System.out.println("found: "+" : "
                     + matcherFormula.start() + " - " + matcherFormula.end());
-             parsedString = log.getContent().substring(matcherFormula.start());
-            System.out.println("parseeeed "+parsedString);
-            params = parsedString.substring(parsedString.indexOf("[") + 8, parsedString.indexOf("]"));
-            parsedString = parsedString.substring(0,parsedString.indexOf("["));
+             tempParsedString = log.getContent().substring(matcherFormula.start());
+            System.out.println("parseeeed "+tempParsedString);
+            parameters = tempParsedString.substring(tempParsedString.indexOf("[") + 8, tempParsedString.indexOf("]"));
+            tempParsedString = tempParsedString.substring(0,tempParsedString.indexOf("["));
             break;
         }
 
-        String[] paramsArray={null};
 
-        if(params!=null) {
-            paramsArray = params.split(",");
 
-            System.out.println("params " + params);
-            String parametersPattern = "(\\(.*\\))(.*)";
+        if(parameters!=null) {
+            paramsArray = parameters.split(",");
+
+            System.out.println("parameters " + parameters);
+
             Pattern patternParams = Pattern.compile(parametersPattern);
             for (int i=0;i<paramsArray.length;++i) {
                 Matcher matcherPatternParms = patternParams.matcher(paramsArray[i]);
@@ -47,32 +51,30 @@ public class ParserImpl implements Parser {
             }
 
             Pattern patternQuestionMark = Pattern.compile(questionMark);
-            Matcher matcherQuestionMark = patternQuestionMark.matcher(parsedString);
+            Matcher matcherQuestionMark = patternQuestionMark.matcher(tempParsedString);
 
-            int counter=0;
-            int startIndex = 0 ;
             while(matcherQuestionMark.find()) {
                 System.out.println("found: "+" : "
                         + matcherQuestionMark.start() + " - " + matcherQuestionMark.end());
 
 
-                //parsedFinalString = parsedString.replace(parsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]);
-                sb.append(parsedString.substring(startIndex,matcherQuestionMark.end()).
-                        replace(parsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]));
+                //parsedFinalString = tempParsedString.replace(tempParsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]);
+                result.append(tempParsedString.substring(startIndex,matcherQuestionMark.end()).
+                        replace(tempParsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]));
                 ++counter;
                 startIndex = matcherQuestionMark.end();
             }
             //doklejmy czesc ktora zostala uceita
-            if(startIndex!=parsedString.length()){
+            if(startIndex!=tempParsedString.length()){
                 System.out.println("uciaaaal");
-                sb.append(parsedString.substring(startIndex,parsedString.length()));
+                result.append(tempParsedString.substring(startIndex,tempParsedString.length()));
             }
 
 
         }
 
-        System.out.println("koncowy "+sb.toString());
+        System.out.println("koncowy "+result.toString());
 
-        return sb.toString();
+        return result.toString();
     }
 }
