@@ -1,12 +1,14 @@
 package app.gwt.sample.server;
 
 
+import app.gwt.sample.shared.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Repository {
 
-    private List<String> elements = new ArrayList<>();
+    private List<Log> elements = new ArrayList<>();
 
     private static Repository repo;
     private Repository(){}
@@ -22,14 +24,14 @@ public class Repository {
         return repo;
     }
 
-    public void addElement(String newElement){
+    public void addElement(Log newElement){
         elements.add(newElement);
     }
 
     public void deleteContent(){
         elements.clear();
     }
-    public List<String>getElements(){
+    public List<Log>getElements(){
         return  elements;
     }
 

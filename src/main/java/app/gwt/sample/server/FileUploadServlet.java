@@ -1,6 +1,7 @@
 package app.gwt.sample.server;
 
 
+import app.gwt.sample.shared.Log;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -32,19 +33,21 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
+System.out.println("jesteeeeeeeeeeeeeeem");
                      FileItemFactory factory = new DiskFileItemFactory();
                      ServletFileUpload upload = new ServletFileUpload(factory);
                      List items = null;
                      String content=null;
                      String thisLine;
+                     int counter=0;
                      StringBuffer contentFile = new StringBuffer();
                      try {
                          items = upload.parseRequest(req);
                      } catch (FileUploadException e) {
                          e.printStackTrace();
                      }
-
+        System.out.println("jesteeeeeeeeeeeeeeem22222222");
+                     repository.deleteContent();
                      Iterator iter = items.iterator();
                      while (iter.hasNext())
                      {
@@ -56,8 +59,11 @@ public class FileUploadServlet extends HttpServlet {
                              BufferedReader br = new BufferedReader(
                                      new InputStreamReader(buff));
                              while ((thisLine = br.readLine()) != null) { // while loop begins here
+                                 Log newLog = new Log();
+                                 newLog.setId(counter++);
+                                 newLog.setContent(thisLine);
                                  System.out.println(thisLine);
-                                 repository.addElement(thisLine);
+                                 repository.addElement(newLog);
                              }
 
 

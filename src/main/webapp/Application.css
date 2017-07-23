@@ -32,3 +32,13 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+
+form.myStyle {
+  padding-left: 500px;
+}
+.gwt-FileUpload {
+  padding-left: 500px;
+}
+.gwt-Form{
+  padding-left: 300px;
+}

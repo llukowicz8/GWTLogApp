@@ -1,0 +1,46 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
+    <ui:style>
+        .special {  padding-left: 700px; }
+        .floater { float: left; }
+    </ui:style>
+    <ui:style field="more">
+        .special { color: #aa4477; }
+        .nice { background-color: #ffaa77; }
+    </ui:style>
+
+    <g:VerticalPanel>
+
+        <g:DialogBox ui:field="wishlistDialogBox"  autoHide="true" modal="true" glassEnabled="true" visible="false"/>
+
+
+        <g:FormPanel ui:field="form" styleName="{style.special}" >
+            <g:Grid>
+                <g:row>
+
+                    <g:customCell>
+                        <g:FileUpload name="uploadFormElement" />
+                    </g:customCell>
+                </g:row>
+                <g:row>
+                    <g:customCell>
+                        <g:Button text="Upload" ui:field="uploadButton" />
+                    </g:customCell>
+                </g:row>
+                <g:row>
+                    <g:customCell>
+                        <g:Button text="Parse" ui:field="parseButton" />
+                    </g:customCell>
+                </g:row>
+
+
+            </g:Grid>
+        </g:FormPanel>
+
+        <cellview:CellTable
+                ui:field="table" pageSize='35' />
+
+
+    </g:VerticalPanel>
+</ui:UiBinder>
