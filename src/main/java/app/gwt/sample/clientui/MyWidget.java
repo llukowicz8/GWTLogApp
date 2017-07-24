@@ -1,14 +1,15 @@
-package app.gwt.sample.client;
+package app.gwt.sample.clientui;
 
 
 
+import app.gwt.sample.client.LogService;
+import app.gwt.sample.client.LogServiceAsync;
+import app.gwt.sample.client.Messages;
 import app.gwt.sample.shared.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.uibinder.client.*;
 
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -43,7 +44,7 @@ public class MyWidget extends Composite {
     DialogBox dialogBox;
 
 
-
+    @UiConstructor
     public MyWidget() {
         initWidget(uiBinder.createAndBindUi(this));
         addColumn();
@@ -92,7 +93,6 @@ public class MyWidget extends Composite {
         table.addColumn(nameColumn,BUNDLE.contentHeader());
 
     }
-
 
 
     private class AllLogsCallback implements AsyncCallback<List<Log>> {

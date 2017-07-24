@@ -20,4 +20,7 @@ public interface Messages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Wynik parsowania")
   String popUpHeader();
 
+  @DefaultMessage("Zawartosc tabeli")
+  String labelTable();
+
 }

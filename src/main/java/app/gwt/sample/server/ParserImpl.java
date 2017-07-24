@@ -23,11 +23,7 @@ public class ParserImpl implements Parser {
         Pattern patternFormula = Pattern.compile(patternSelect);
         Matcher matcherFormula = patternFormula.matcher(log.getContent());
         while(matcherFormula.find()) {
-
-            System.out.println("found: "+" : "
-                    + matcherFormula.start() + " - " + matcherFormula.end());
-             tempParsedString = log.getContent().substring(matcherFormula.start());
-            System.out.println("parseeeed "+tempParsedString);
+            tempParsedString = log.getContent().substring(matcherFormula.start());
             parameters = tempParsedString.substring(tempParsedString.indexOf("[") + 8, tempParsedString.indexOf("]"));
             tempParsedString = tempParsedString.substring(0,tempParsedString.indexOf("["));
             break;
@@ -37,14 +33,10 @@ public class ParserImpl implements Parser {
 
         if(parameters!=null) {
             paramsArray = parameters.split(",");
-
-            System.out.println("parameters " + parameters);
-
             Pattern patternParams = Pattern.compile(parametersPattern);
             for (int i=0;i<paramsArray.length;++i) {
                 Matcher matcherPatternParms = patternParams.matcher(paramsArray[i]);
                 while (matcherPatternParms.find()) {
-                    System.out.println("group 1: " + matcherPatternParms.group(2));
                     paramsArray[i]=matcherPatternParms.group(2);
                 }
 
@@ -54,11 +46,7 @@ public class ParserImpl implements Parser {
             Matcher matcherQuestionMark = patternQuestionMark.matcher(tempParsedString);
 
             while(matcherQuestionMark.find()) {
-                System.out.println("found: "+" : "
-                        + matcherQuestionMark.start() + " - " + matcherQuestionMark.end());
 
-
-                //parsedFinalString = tempParsedString.replace(tempParsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]);
                 result.append(tempParsedString.substring(startIndex,matcherQuestionMark.end()).
                         replace(tempParsedString.substring(matcherQuestionMark.start(),matcherQuestionMark.end()),paramsArray[counter]));
                 ++counter;
@@ -66,14 +54,10 @@ public class ParserImpl implements Parser {
             }
             //doklejmy czesc ktora zostala uceita
             if(startIndex!=tempParsedString.length()){
-                System.out.println("uciaaaal");
                 result.append(tempParsedString.substring(startIndex,tempParsedString.length()));
             }
-
-
+            
         }
-
-        System.out.println("koncowy "+result.toString());
 
         return result.toString();
     }

@@ -17,7 +17,7 @@ public class Repository {
         if (repo == null){
             synchronized(Repository.class){
                 if (repo == null){
-                    repo = new Repository();//instance will be created at request time
+                    repo = new Repository();
                 }
             }
         }

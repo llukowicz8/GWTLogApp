@@ -4,6 +4,7 @@
   <inherits name='app.gwt.sample.Application' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Application/greet" class="app.gwt.sample.server.GreetingServiceImpl" />
+  <servlet path="/Application/logService" class="app.gwt.sample.server.LogServiceImpl" />
 
+  <source path='app.gwt.sample.server.*'/>
 </module>

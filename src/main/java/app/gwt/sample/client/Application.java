@@ -1,5 +1,6 @@
 package app.gwt.sample.client;
 
+import app.gwt.sample.clientui.MyWidget;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
@@ -9,7 +10,6 @@ import com.google.gwt.user.client.ui.*;
  */
 public class Application implements EntryPoint {
 
-  private static final String UPLOAD_ACTION_URL = GWT.getModuleBaseURL() + "upload";
 
   /**
    * The message displayed to the user when the server cannot be reached or

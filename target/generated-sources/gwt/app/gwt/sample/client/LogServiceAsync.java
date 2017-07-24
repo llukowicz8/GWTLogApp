@@ -3,14 +3,21 @@ package app.gwt.sample.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface GreetingServiceAsync
+public interface LogServiceAsync
 {
 
     /**
      * GWT-RPC service  asynchronous (client-side) interface
-     * @see app.gwt.sample.client.GreetingService
+     * @see app.gwt.sample.client.LogService
      */
-    void greetServer( java.lang.String name, AsyncCallback<java.lang.String> callback );
+    void getLogs( AsyncCallback<java.util.List<app.gwt.sample.shared.Log>> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see app.gwt.sample.client.LogService
+     */
+    void getParsedLogById( int logId, AsyncCallback<java.lang.String> callback );
 
 
     /**
@@ -18,13 +25,13 @@ public interface GreetingServiceAsync
      */
     public static final class Util 
     { 
-        private static GreetingServiceAsync instance;
+        private static LogServiceAsync instance;
 
-        public static final GreetingServiceAsync getInstance()
+        public static final LogServiceAsync getInstance()
         {
             if ( instance == null )
             {
-                instance = (GreetingServiceAsync) GWT.create( GreetingService.class );
+                instance = (LogServiceAsync) GWT.create( LogService.class );
             }
             return instance;
         }

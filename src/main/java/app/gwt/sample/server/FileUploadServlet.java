@@ -18,7 +18,6 @@ import java.util.List;
 
 public class FileUploadServlet extends HttpServlet {
 
-    Repository repository = Repository.getInstance();
     FileReader fileReader = new FileReaderImpl();
 
     @Override

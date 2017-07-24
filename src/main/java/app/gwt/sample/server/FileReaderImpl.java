@@ -17,7 +17,6 @@ public class FileReaderImpl implements FileReader {
 
     @Override
     public void readFile(List<FileItem> items) {
-        String content = "";
         String actualLine = "";
         int counter = 0;
         Iterator iter = items.iterator();

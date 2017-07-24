@@ -6,10 +6,7 @@
 <web-app>
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>app.gwt.sample.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+
 
   <servlet>
     <servlet-name>uploadServlet</servlet-name>
@@ -31,10 +28,7 @@
   </servlet-mapping>
 
 
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/Application/greet</url-pattern>
-  </servlet-mapping>
+
 
 
   <!-- Default page to serve -->

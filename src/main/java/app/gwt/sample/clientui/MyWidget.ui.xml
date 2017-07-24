@@ -2,19 +2,17 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
              xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
 
-    <ui:style src="styles.css" field="styles"/>
+    <ui:style src="../public/styles.css"  field="styles"/>
     <ui:with field="BUNDLE"
              type="app.gwt.sample.client.Messages"/>
-    <g:VerticalPanel >
-
+    <g:VerticalPanel>
         <g:DialogBox ui:field="dialogBox" autoHide="true" modal="true" glassEnabled="true" visible="false">
-
-</g:DialogBox>
-        <g:FormPanel ui:field="form" styleName="{styles.myStyle}"  >
+        </g:DialogBox>
+        <g:FormPanel ui:field="form" styleName="{styles.myStyle}">
             <g:Grid>
                 <g:row>
                     <g:customCell>
-                        <g:FileUpload name="uploadFormElement" styleName="{styles.formBtn}" />
+                        <g:FileUpload name="uploadFormElement" styleName="{styles.formBtn}"/>
                     </g:customCell>
                 </g:row>
                 <g:row>
@@ -24,17 +22,17 @@
                 </g:row>
                 <g:row>
                     <g:customCell>
-                        <g:Button text="{BUNDLE.parseButton}" ui:field="parseButton" styleName="{styles.formBtn}" />
+                        <g:Button text="{BUNDLE.parseButton}" ui:field="parseButton" styleName="{styles.formBtn}"/>
                     </g:customCell>
                 </g:row>
-
-
             </g:Grid>
         </g:FormPanel>
-        <g:Label text="Zawartosc tabeli"></g:Label>
+
+        <g:Label text="{BUNDLE.labelTable}"></g:Label>
+
         <g:ScrollPanel height="500px">
-        <cellview:CellTable
-                ui:field="table" pageSize='10' />
+            <cellview:CellTable
+                    ui:field="table" pageSize='10'/>
         </g:ScrollPanel>
 
     </g:VerticalPanel>
